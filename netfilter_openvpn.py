@@ -40,7 +40,10 @@
 
 import os
 import sys
-import ldap
+try:
+	import ldap
+except ImportError:
+	import ldap3
 import fcntl
 import time
 import signal, errno

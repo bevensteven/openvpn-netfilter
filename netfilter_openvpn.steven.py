@@ -1,3 +1,6 @@
+#!/usr/bin/env python
+# vim: set noexpandtab:ts=4
+
 import os 
 import sys 
 import fcntl 

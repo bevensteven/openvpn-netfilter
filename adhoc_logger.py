@@ -13,14 +13,14 @@ class adHocLogger(object):
 			print("Initializing a new log. Removing {}".format(filepath))
 			os.remove(filepath)
 		self.lf = open(filepath, 'a')
-		self.lf.write('TAGS: {}'.format(', '.join(tags)))
+		self.lf.write('TAGS: {}\n'.format(', '.join(tags)))
 		self.line = 0 
 
 	def sendToSyslog(self, boolean):
-		self.lf.write('sendToSyslog = {}'.format(str(boolean)))
+		self.lf.write('sendToSyslog = {}\n'.format(str(boolean)))
 
 	def syslogOnly(self, boolean):
-		self.lf.write('syslogOnly = {}'.format(str(boolean)))
+		self.lf.write('syslogOnly = {}\n'.format(str(boolean)))
 
 	def send(self, summary=str(), details=dict()):
 		self.lf.write('[ SUMMARY ] line {} | {}\n'.format(self.line, summary))

@@ -232,6 +232,10 @@ def add_chain(userscip, userscn, dev):
 	iptables('-A INPUT -s {} -j {}'.format(userscip, userscip))
 	iptables('-A FORWARD -s {} -j {}'.format(userscip, userscip))
 
+	iptables('-I {} -s {} -m set --match-set {} dst -j ACCEPT'.format(userscip, userscip, userscip))
+	iptables('-I {} -m conntrack --ctstate ESTABLISHED -j ACCEPT -m comment --comment "{} at {}"'.format(userscip, usercn, userscip))
+	iptables('-A {} -j LOG --log-prefix "DROP {} " -m comment --comment "{} at {}"'.format(userscip, usercn[:23], usercn, userscip))
+	iptables('-A {} -j DROP -m comment --comment {} at {}'.format(userscip, usercn, userscip))
 	kill_block_hack(userscip, usercn)
 	return True 
 

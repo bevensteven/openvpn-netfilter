@@ -235,7 +235,7 @@ def add_chain(userscip, userscn, dev):
 	iptables('-A OUTPUT -d {} -j {}'.format(userscip, userscip))
 	iptables('-A INPUT -s {} -j {}'.format(userscip, userscip))
 	iptables('-A FORWARD -s {} -j {}'.format(userscip, userscip))
-
+	print("RAN HALF OF THE ADD_CHAIN COMMANDS")
 	iptables('-I {} -s {} -m set --match-set {} dst -j ACCEPT'.format(userscip, userscip, userscip))
 	iptables('-I {} -m conntrack --ctstate ESTABLISHED -j ACCEPT -m comment --comment "{} at {}"'.format(userscip, usercn, userscip))
 	iptables('-A {} -j LOG --log-prefix "DROP {} " -m comment --comment "{} at {}"'.format(userscip, usercn[:23], usercn, userscip))
@@ -303,6 +303,7 @@ if __name__ == '__main__':
 
 	if main():
 		free_lock(lockfd)
+		mdmsg.send(summary='Successful netfilter operation.')
 		sys.exit(0)
 
 	free_lock(lockfd)

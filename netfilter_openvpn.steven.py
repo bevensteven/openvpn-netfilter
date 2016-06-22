@@ -12,6 +12,7 @@ except ImportError:
 	import mozdef_client as mozdef 
 
 from contextlib import contextmanager
+from adhoc_logger import adHocLogger
 import imp 
 
 cfg_path = [
@@ -37,7 +38,7 @@ if config == None:
 
 ### LOGGING ### 
 
-mdmsg = mozdef.MozDefMsg(config.MOZDEF_HOST, tags=['openvpn', 'netfilter'])
+mdmsg = adHocLogger(config.LOG_PATH, tags=['netfilter', 'openvpn']) 
 if config.USE_SYSLOG:
 	mdmsg.sendToSyslog = True 
 if not config.USE_MOZDEF:
@@ -275,7 +276,7 @@ def main():
 		return False 
 	operation = sys.argv[1]
 
-	if opearation == 'add':
+	if operation == 'add':
 		mdmsg.send(summary='Logging success: OpenVPN endpoint connected', 
 			details={'srcip': client_ip, 'vpnip': vpn_ip, 'srcport': client_port, 'user': usercn})
 		return add_chain(vpn_ip, usercn, device)

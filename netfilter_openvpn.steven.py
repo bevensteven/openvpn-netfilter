@@ -37,7 +37,7 @@ if config == None:
 
 ### LOGGING ### 
 
-mdmsg = mozdef.MozDefMsg(config.MOZD, tags=['openvpn', 'netfilter'])
+mdmsg = mozdef.MozDefMsg(config.MOZDEF_HOST, tags=['openvpn', 'netfilter'])
 if config.USE_SYSLOG:
 	mdmsg.sendToSyslog = True 
 if not config.USE_MOZDEF:

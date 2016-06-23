@@ -20,6 +20,6 @@ else
 	}
 fi
 
-${SUDO} /usr/lib/openvpn/plugins/netfilter_openvpn.steven.py ${operation} &
+${SUDO} python /etc/openvpn/openvpn-netfilter/netfilter_openvpn.steven.py ${operation} &
 disown
 exit 0

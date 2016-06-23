@@ -29,7 +29,7 @@ config = imp.load_source('config', default_config_on_VPN)
 
 for cfg in cfg_path:
 	try:
-		print("Attempting to load config path {}".format(cfg))
+		# print("Attempting to load config path {}".format(cfg))
 		config = imp.load_source('config', cfg)
 	except:
 		pass 
@@ -242,7 +242,7 @@ def add_chain(userscip, userscn, dev):
 	iptables('-I {} -s {} -m set --match-set {} dst -j ACCEPT'.format(userscip, userscip, userscip))
 	iptables('-I {} -m conntrack --ctstate ESTABLISHED -j ACCEPT -m comment --comment "{} at {}"'.format(userscip, usercn, userscip))
 	iptables('-A {} -j LOG --log-prefix "DROP {} " -m comment --comment "{} at {}"'.format(userscip, usercn[:23], usercn, userscip))
-	iptables('-A {} -j DROP -m comment --comment {} at {}'.format(userscip, usercn, userscip))
+	iptables('-A {} -j DROP -m comment --comment "{} at {}"'.format(userscip, usercn, userscip))
 	kill_block_hack(userscip, usercn)
 	return True 
 
@@ -265,12 +265,17 @@ def update_chain(userscip, usercn, dev):
 	return add_chain(userscip, usercn, dev)
 
 def main():
+	global device
+	global client_ip
+	global vpn_ip
+	global client_port
+	global usercn
 	device = os.environ.get('dev', 'lo')
 	client_ip = os.environ.get('untrusted_ip', '127.0.0.1')
 	vpn_ip = os.environ.get('address', '127.0.0.1')
 	client_port = os.environ.get('untrusted_port', '0')
 	usercn = os.environ.get('common_name', None)
-
+	print('usercn = {}'.format(usercn))
 	if usercn == None:
 		usercn = os.environ.get('username', None)
 

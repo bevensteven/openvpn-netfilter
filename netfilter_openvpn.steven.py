@@ -24,12 +24,12 @@ cfg_path = [
 	'~/openvpn-netfilter/netfilter_openvpn.steven.conf'
 ]
 
-default_config_on_VPN = 'netfilter_openvpn.steven.conf'
+default_config_on_VPN = '/etc/openvpn/openvpn-netfilter/netfilter_openvpn.steven.conf'
 config = imp.load_source('config', default_config_on_VPN)
 
 for cfg in cfg_path:
 	try:
-		# print("Attempting to load config path {}".format(cfg))
+		print("Attempting to load config path {}".format(cfg))
 		config = imp.load_source('config', cfg)
 	except:
 		pass 

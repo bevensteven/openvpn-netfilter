@@ -1,4 +1,5 @@
 import os
+from datetime import datetime
 
 class adHocLogger(object):
 	"""
@@ -23,7 +24,7 @@ class adHocLogger(object):
 		self.lf.write('syslogOnly = {}\n'.format(str(boolean)))
 
 	def send(self, summary=str(), details=dict()):
-		self.lf.write('[ SUMMARY ] line {} | {}\n'.format(self.line, summary))
+		self.lf.write('[ SUMMARY ] @ {} | line {} | {}\n'.format(datetime.now().time(), self.line, summary))
 		self.lf.write('[ DETAILS ] line {}\n'.format(self.line))
 		for key in details:
 			self.lf.write('[ DETAILS ] ({}) {}: {}\n'.format(self.line, str(key), str(details[key])))

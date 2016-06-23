@@ -35,7 +35,8 @@ for cfg in cfg_path:
 if config == None:
 	print("Failed to load config")
 	sys.exit(1)
-
+else:
+    print('netfilter using config file {}'.format(config)')
 ### LOGGING ### 
 
 mdmsg = adHocLogger(config.LOG_PATH, tags=['netfilter', 'openvpn']) 

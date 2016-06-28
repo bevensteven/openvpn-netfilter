@@ -151,7 +151,7 @@ def build_firewall_rule(name, userscip, destip, destport=None, protocol=None, co
 		@destip --> insert into user's ipset 
 	'''
 	if comment:
-		coment = " -m comment --comment \"{}\"".format(comment)
+		comment = " -m comment --comment \"{}\"".format(comment)
 	if destport and protocol:
 		destport = " -m multiport --deports " + destport 
 		protocol = " -p " + protocol 
